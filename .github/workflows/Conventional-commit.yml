@@ -35,6 +35,7 @@ jobs:
       
       - name: Lint stage
         run: |
+           npm install --save-dev prettier
            npm run format
            npm run lint-staged
 
