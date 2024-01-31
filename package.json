@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "pre-commit": "lint-staged",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "jest --coverage",
+    "lint-staged": "npm run lint && npm run format && npm run test"
   },
   "dependencies": {
     "next": "14.1.0",
