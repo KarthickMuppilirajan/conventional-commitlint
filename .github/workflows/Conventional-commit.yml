@@ -1,6 +1,6 @@
 name: CI
 
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   commitlint:
@@ -16,7 +16,7 @@ jobs:
           sudo apt install -y git curl
           curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
           sudo DEBIAN_FRONTEND=noninteractive apt install -y nodejs
-          
+
       - name: Print versions
         run: |
           git --version
@@ -32,6 +32,12 @@ jobs:
       - name: Validate current commit (last commit) with commitlint
         if: github.event_name == 'push'
         run: npx commitlint --from HEAD~1 --to HEAD --verbose
+      
+      - name: Lint stage
+        run: |
+           npm install --save-dev prettier
+           npm run format
+           npm run lint-staged
 
       - name: Validate PR commits with commitlint
         if: github.event_name == 'pull_request'
